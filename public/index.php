@@ -4,7 +4,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 include_once('./public/AutoLoader.php');
-AutoLoader::registerDirectory('./classes');
+AutoLoader::registerDirectory('./app');
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;

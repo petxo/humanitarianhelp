@@ -1,22 +1,18 @@
 <?php
 
+
 namespace Test\Domain\Repositories;
 
-class HumanitarianHelpRepositoryTest extends \PHPUnit\Framework\TestCase
-{
-    /**
-     * @dataProvider provider
-     */
-    public function testMethod($data)
-    {
-        $this->assertTrue($data);
-    }
+use \PHPUnit\Framework\TestCase;
+use \App\Domain\Repositories\HumanitarianHelpRepository;
 
-    public function provider()
+class HumanitarianHelpRepositoryTest extends TestCase
+{
+    public function testGetHelpByCountry()
     {
-        return [
-            'my named data' => [true],
-            'my data'       => [true]
-        ];
+        $repo = new HumanitarianHelpRepository('http://datastore.iatistandard.org/api/1/access/activity.json');
+        $data = $repo->getByCountry('SS');
+        $this->assertNotNull($data);
+        $this->assertNotCount(0, $data->{'iati-activities'});
     }
 }
