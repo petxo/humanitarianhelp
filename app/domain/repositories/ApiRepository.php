@@ -1,11 +1,7 @@
 <?php
-
 namespace App\Domain\Repositories;
 
-/**
-* Repositorio remoto de la ayuda humanitaria
-*/
-class HumanitarianHelpRepository{
+abstract class ApiRepository implements IApiRepository{
 
     private $_url_api;
 
@@ -25,17 +21,9 @@ class HumanitarianHelpRepository{
     }
 
     /**
-    * Devulve la ayuda humanitaria del pais solicitado
-    * @param string $country Codigo ISO-Alpha2 del pais
-    */
-    public function getByCountry($country){
-        return $this->execute(array('recipient-country'=>$country));
-    }
-
-    /**
     * Realiza la llamada a la api json
     */
-    private function execute($params){
+    protected function execute($params){
         $headers = array('Accept' => 'application/json');
         $response = \Unirest\Request::get($this->_url_api, $headers, $params);
 
@@ -47,3 +35,4 @@ class HumanitarianHelpRepository{
         }
     }
 }
+ ?>
