@@ -1,0 +1,94 @@
+{
+   "activity-date":[ ],
+   "collaboration-type":{
+      "code":"1"
+   },
+   "default-currency":"EUR",
+   "description":"Humanitarian assistance through UNICEF to South Sudan including assistance in nutrition WASH (water sanitation and hygiene) education and protection.",
+   "iati-identifier":"2013130096",
+   "last-updated-datetime":"2015-10-16T13:36:49.00",
+   "participating-org":[ ],
+   "policy-marker":[ ],
+   "recipient-country":{ },
+   "recipient-region":{ },
+   "reporting-org":{ },
+   "sector":{ },
+   "title":"Humanitarian assistance through UNICEF to South Sudan",
+   "transaction":[
+      {
+         "aid-type":{ },
+         "disbursement-channel":{ },
+         "finance-type":{ },
+         "flow-type":{ },
+         "provider-org":"MFA Finland",
+         "receiver-org":{ },
+         "tied-status":{ },
+         "transaction-type":{
+            "code":"C",
+            "text":"Commitment"
+         },
+         "value":{
+            "currency":"EUR",
+            "text":"1000000",
+            "value-date":"2014-03-11"
+         }
+      },
+      {
+         "aid-type":{
+            "code":"C01"
+         },
+         "finance-type":{
+            "code":"110"
+         },
+         "flow-type":{
+            "code":"10"
+         },
+         "provider-org":"MFA Finland",
+         "receiver-org":{
+            "ref":"41122",
+            "text":"UN Childrens Fund"
+         },
+         "tied-status":{
+            "code":"5"
+         },
+         "transaction-type":{
+            "code":"D",
+            "text":"Disbursement"
+         },
+         "value":{
+            "currency":"EUR",
+            "text":"1000000",
+            "value-date":"2014-03-11"
+         }
+      },
+      {
+         "aid-type":{
+            "code":"C01"
+         },
+         "finance-type":{
+            "code":"110"
+         },
+         "flow-type":{
+            "code":"10"
+         },
+         "provider-org":"MFA Finland",
+         "receiver-org":{
+            "ref":"41122",
+            "text":"UN Childrens Fund"
+         },
+         "tied-status":{
+            "code":"5"
+         },
+         "transaction-type":{
+            "code":"QS",
+            "text":"Sale of Equity"
+         },
+         "value":{
+            "currency":"EUR",
+            "text":"0",
+            "value-date":"2014-03-11"
+         }
+      }
+   ],
+   "xml:lang":"en"
+}
