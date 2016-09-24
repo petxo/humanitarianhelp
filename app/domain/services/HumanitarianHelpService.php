@@ -9,8 +9,20 @@ use \App\Cache\ICacheStorage;
 */
 class HumanitarianHelpService{
 
+    /**
+    * @var IHumanitarianHelpRepository
+    */
     private $_repository;
+
+    /**
+    * @var ICacheStorage
+    */
     private $_cache;
+
+    /**
+    * @var ITransactionChainBuilder
+    */
+    private $_chainBuilder;
 
     const HELP_BY_COUNTRY = "HELP_BY_COUNTRY";
 
@@ -19,9 +31,12 @@ class HumanitarianHelpService{
     * @param HumanitarianHelpRepository $repository Repositio de la ayuda humanitaria
     * @param ICacheStorage $cache Alamcen de cache
     */
-    public function __construct(IHumanitarianHelpRepository $repository, ICacheStorage $cache){
+    public function __construct(IHumanitarianHelpRepository $repository,
+                                ICacheStorage $cache,
+                                ITransactionChainBuilder $chainBuilder){
         $this->_repository = $repository;
         $this->_cache = $cache;
+        $this->_chainBuilder = $chainBuilder;
     }
 
     /**
@@ -36,7 +51,8 @@ class HumanitarianHelpService{
 
         //Obtenemos los datos del repositorio
         $data = $this->_repository->getByCountry($country);
-        
+        $chain = $this->_chainBuilder->build($data->{'iati-activities'});
+
 
     }
 }

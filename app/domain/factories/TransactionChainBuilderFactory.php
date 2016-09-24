@@ -2,6 +2,8 @@
 namespace App\Domain\Factories;
 
 use \App\Domain\Factories\IatiTransactionChainBuilder;
+use \App\Domain\Specifications\DisbursementTransactionSpec;
+use \App\Domain\Specifications\TransactionActivitySpec;
 
 class TransactionChainBuilderFactory{
 
@@ -11,6 +13,9 @@ class TransactionChainBuilderFactory{
     */
     public static function createIatiTransactionBuilder()
     {
-        return new IatiTransactionChainBuilder();
+        $translator = TransactionTranslatorFactory::createIatiTranslator();
+        $spec = new DisbursementTransactionSpec();
+        $activitySpec = new TransactionActivitySpec();
+        return new IatiTransactionChainBuilder($translator, $spec, $activitySpec);
     }
 }

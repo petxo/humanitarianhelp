@@ -2,7 +2,7 @@
 
 namespace App\Domain\Factories;
 
-class ITransactionChainBuilder{
+interface ITransactionChainBuilder{
 
     /**
     * Devuelve una cadena de transaciones, con todas las transacciones efectuadas
