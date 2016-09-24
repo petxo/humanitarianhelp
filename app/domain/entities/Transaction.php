@@ -2,7 +2,9 @@
 
 namespace App\Domain\Entities;
 
-class Transaction {
+use \App\Domain\Visitors\IElement;
+
+class Transaction implements IElement{
 
     private $_provider;
     private $_currency;
@@ -123,6 +125,14 @@ class Transaction {
         return !is_null($this->_previous);
     }
 
+    /**
+    * Metodo para que un elemento accepte un visitante
+    */
+    public function accept($visitor){
+        $visitor->getAggregate()->addAmount((int)substr($this->_date, 0, 4),
+                                            $this->_provider,
+                                            $this->_value);
+    }
 }
 
 ?>

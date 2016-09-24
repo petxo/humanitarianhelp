@@ -3,6 +3,11 @@
 namespace App\Domain\Services;
 use \App\Domain\Repositories\IHumanitarianHelpRepository;
 use \App\Cache\ICacheStorage;
+use \App\Domain\Visitors\IVisitor;
+use \App\Domain\Translators\ITranslator;
+use \App\Domain\Factories\ITransactionChainBuilder;
+use \App\Configuration;
+use \App\Logging\LoggerManager;
 
 /**
 * Service que gestiona la información de la ayuda humanitaria
@@ -24,6 +29,16 @@ class HumanitarianHelpService{
     */
     private $_chainBuilder;
 
+    /**
+    * @var IVisitor
+    */
+    private $_visitor;
+
+    /**
+    *
+    */
+    private $_translator;
+
     const HELP_BY_COUNTRY = "HELP_BY_COUNTRY";
 
     /**
@@ -33,10 +48,14 @@ class HumanitarianHelpService{
     */
     public function __construct(IHumanitarianHelpRepository $repository,
                                 ICacheStorage $cache,
-                                ITransactionChainBuilder $chainBuilder){
+                                ITransactionChainBuilder $chainBuilder,
+                                IVisitor $visitor,
+                                ITranslator $translator){
         $this->_repository = $repository;
         $this->_cache = $cache;
         $this->_chainBuilder = $chainBuilder;
+        $this->_visitor = $visitor;
+        $this->_translator = $translator;
     }
 
     /**
@@ -52,8 +71,14 @@ class HumanitarianHelpService{
         //Obtenemos los datos del repositorio
         $data = $this->_repository->getByCountry($country);
         $chain = $this->_chainBuilder->build($data->{'iati-activities'});
+        $this->_visitor->visit($chain);
 
-
+        $result = array();
+        $this->_translator->translate($this->_visitor->getAggregate(), $result);
+        $this->_cache->set(self::HELP_BY_COUNTRY.'_'.$country, $result,
+                        Configuration::getInstance()->getConfig()['cache_time']);
+        LoggerManager::getLogger()->addInfo(json_encode($result));
+        return $result;
     }
 }
 

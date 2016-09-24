@@ -9,7 +9,7 @@ class TransactionIatiTranslator implements ITranslator{
     * @param stdClass $iati_trasanction Entidad de la transaccion de Iati
     * @param Transaction $transaccion Entidad de transaccion del dominio
     */
-    public function translate($iati_trasanction, $transaction){
+    public function translate($iati_trasanction, &$transaction){
         $transaction->setProvider($iati_trasanction->{'provider-org'});
         $transaction->setCurrency($iati_trasanction->value->currency);
         $transaction->setValue((float)$iati_trasanction->value->text);

@@ -9,7 +9,7 @@ interface ITranslator{
     * @param mixed $source Entidad de origen
     * @param mixed $destination Entidad de destino
     */
-    public function translate($source, $destiantion);
+    public function translate($source, &$destiantion);
 
 }
 
